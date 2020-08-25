@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ product.title }} {{ block.super }} {% endblock %}
+{% block description %}{% autoescape off %} {{ description }}... {% endautoescape %} {% endblock %}
+
+{% block content %}
+    <section class="hero hero--overlay-layer hero-default">
+      <div class="container" style="opacity: 1;">
+        <div class="hero__content text-left"><span>{{ product.category }}</span>
+          <h1>{{ product.name }}</h1>
+            <h6 style="margin-top: 15px; text-transform: lowercase;">Материал: {{ product.material }}</h6>
+            <h5 class="price">{{ product.price }}</h5>
+          <p>{{ product.short_description }}</p>
+        </div>
+      </div>
+    </section>
+    <div class="container ms-content--portfolio" style="opacity: 1;">
+      <div class="row grid-content blockgallery" style="position: relative; height: 504.75px;">
+          <div class="grid-sizer col-xs-12 col-md-4 col-sm-3"></div>
+          <div class="grid-item col-xs-12 col-md-4 col-sm-3" style="position: absolute; left: 0%; top: 0px;">
+              {% for i in product.images.all %}
+                  <a class="mfp-img has-img" href="{{ i.image.url }}">
+                      <img src="{% static 'assets/img/portfolio/jr_pf.png' %}" data-src="{{ i.image.url }}" title="{{ i.title }}" alt="{{ i.title}}" class="lazy">
+                  </a>
+              {% endfor %}
+          </div>
+      </div>
+
+      <div class="ms-next-case">
+        <div class="single-portfolio-nav">
+          <div class="s-p-next"><img src="{% static 'assets/img/portfolio/jr_pf.png' %}" data-src="{{ product.image.url }}" style="max-width: 100%; border-radius: 8px; overflow: hidden;" class="lazy">
+              <div class="container" style="opacity: 1;">
+                <h1>Мир диванов</h1>
+              </div></div>
+        </div>
+      </div>
+      <div class="container ms-cta" style="opacity: 1;">
+        <div class="cta-section"><span class="line"></span>
+          <div class="cta-text">
+            <p>Понравился товар?</p>
+            <h2 class="pb-3">Отличный выбор</h2>
+              <a class="btn btn--primary btn-2 mt-3" href="https://wa.me/7{{ contact.whatsapp }}">Заказать по Whatsapp <i class="fab fa-whatsapp" style="margin-left: 7px;"a></i></a>
+              <a class="btn btn--primary mt-3" href="{% url 'product_order' product.id %}">Заказать онлайн <i class="fas fa-couch" style="margin-left: 7px;"></i></a>
+              <a class="btn btn--primary btn-2 mt-3" href="{% url 'product_order' product.id %}">Консультация <i class="far fa-question-circle" style="margin-left: 7px;"a></i></a>
+          </div>
+        </div>
+      </div>
+         <h2 class="text-center">Полное описание</h2>
+        <div class="description mt-3" >
+            {% autoescape off %}{{ product.description }}{% endautoescape %}
+        </div>
+    </div>
+
+{% include 'includes/footer.html' %}
+{% endblock %}
+

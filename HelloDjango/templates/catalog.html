@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block title %}{{ info.title }} | {{ block.super }} {% endblock %}
+{% block description %} {{ info.text }} {% endblock %}
+
+{% block content %}
+    <div class="margin-top-xl"></div>
+    <section class="hero hero--overlay-layer hero-default">
+      <div class="container">
+        <div class="hero__content text-left">
+          <h1>{{ info.title }}</h1>
+          <p>{{ info.text }}</p>
+        </div>
+      </div>
+    </section>
+    <div class="container ms-content">
+      <div class="subnav margin-bottom--lg">
+        <div class="subnav__container">
+          <div class="filter-nav filter-nav--expanded js-filter-nav">
+            <button class="reset btn btn--subtle is-hidden js-filter-nav__control" aria-label="Select a filter option" aria-controls="filter-nav"><span class="js-filter-nav__placeholder" aria-hidden="true">Выберите категорию</span>
+              <svg class="icon icon--xxs margin-left-xxs" aria-hidden="true" viewBox="0 0 12 12">
+                <polyline points="0.5 3.5 6 9.5 11.5 3.5" fill="none" stroke-width="1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></polyline>
+              </svg>
+            </button>
+            <div class="filter-nav__wrapper js-filter-nav__wrapper" id="filter-nav">
+              <nav class="filter-nav__nav js-filter-nav__nav">
+                <ul class="filtr-btn filter-nav__list js-filter-nav__list">
+                <li class="filter-nav__item subnav__link" data-filter="*">
+                    <button class="reset filter-nav__btn js-filter-nav__btn js-tab-focus active" aria-current="true">Все товары</button>
+                  </li>
+
+                    {% for category in categories %}
+                  <li class="filter-nav__item subnav__link" data-filter=".cat_class_{{ category.id }}">
+                    <button class="reset filter-nav__btn js-filter-nav__btn" aria-current="false">
+                        {{ category.title }}</button>
+                  </li>
+                    {% endfor %}
+
+                  <li class="filter-nav__marker js-filter-nav__marker" aria-hidden="true"></li>
+                </ul>
+                <button class="reset filter-nav__close-btn is-hidden js-filter-nav__close-btn js-tab-focus" aria-label="Close navigation">
+                  <svg class="icon" viewBox="0 0 16 16" aria-hidden="true">
+                    <g stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10">
+                      <line x1="13.5" y1="2.5" x2="2.5" y2="13.5"></line>
+                      <line x1="2.5" y1="2.5" x2="13.5" y2="13.5"></line>
+                    </g>
+                  </svg>
+                </button>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row ms-p2 work-grid parent grid grid-gap-lg grid-content portfolio-feed">
+          <div class="grid-sizer col-xs-12 col-md-6 col-sm-6 "></div>
+
+          {% for product in products %}
+            <div class="grid-item mb-5 col-xs-12 col-md-6 col-sm-6  cat_class_{{ product.category.id }}">
+                  <div class="work-card card--is-link"><a class="work-card__img-link" href="{{ product.get_absolute_url }}" aria-label="Servant of academy">
+                      <figure class="work-card__img media-wrapper media-wrapper--16:9">
+                          {% thumbnail product.image "427x265" crop="center" as im %}
+                            <img src="{% static 'assets/img/portfolio/jr_pf.png' %}" data-src="{{ im.url }}"  alt="{{ product.name}}" class="lazy">
+                          {% endthumbnail %}
+                        <div class="glow-wrap"><i class="glow vertical"></i></div>
+                      </figure></a>
+                    <div class="work-card__content"><span class="work-card__badge margin-bottom-xxs">{{ product.material }}</span>
+                      <a class="work-card__title" href="{{ product.get_absolute_url }}">
+                        <h3>{{ product.name }}</h3></a>
+                        <h5 class="price">{{ product.price }}</h5>
+                      <a class="work-card__link" href="{{ product.get_absolute_url }}">Подробнее
+                        <svg class="icon" viewBox="0 0 12 12">
+                          <g stroke-width="1" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="11.5" y1="6" x2="0.5" y2="6"></line>
+                            <polyline points="7.5 2 11.5 6 7.5 10"></polyline>
+                          </g>
+                        </svg></a>
+                    </div>
+                  </div>
+                </div>
+          {% endfor %}
+
+      </div>
+
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% include 'includes/footer.html' %}
+{% endblock %}

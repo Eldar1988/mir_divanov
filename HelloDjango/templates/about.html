@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ about.title }} | {{ block.super }} {% endblock %}
+
+{% block description %} {{ info_seo }}... {% endblock %}
+
+{% block content %}
+
+    <div class="container" style="margin-top: 150px;">
+        <section class="hero hero--overlay-layer hero-default">
+          <div class="container" style="opacity: 1;">
+            <div class="hero__content text-left"><span>Мир диванов</span>
+              <h1>{{ about.title }}</h1>
+              <p>{{ about.sub_title }}</p>
+            </div>
+          </div>
+        </section>
+    </div>
+
+    <div class="container" style="opacity: 1;">
+      <div class="ms-page ms-page--about text-component">
+        <div class="ms_services">
+          <h2 class="text-align-left">{{ about.service_title }}</h2>
+          <div class="row">
+
+              {% for i in service %}
+            <!-- Service Item-->
+                        <div class="grid-sizer col-sm-6 col-md-4 col-lg-4"></div>
+                        <div class="grid-item col-sm-6 col-md-4 col-lg-4 pb-lg-5 pb-4">
+                          <div class="ms_services--heading">
+                              {% autoescape off %}{{ i.icon }}{% endautoescape %}
+                            <h4>{{ i.title}}</h4>
+                          </div>
+                          <p>{{ i.text }}</p>
+                        </div>
+              {% endfor %}
+
+          </div>
+        </div>
+        <div class="ms_experience">
+          <h2 class="text-align-left">{{ about.info_title }}</h2>
+          <!-- Experience Item-->
+                    <div class="row">
+                      <div class="grid-item col-12">
+                        <div class="">
+                          {% autoescape off %}{{ about.info }}{% endautoescape %}
+                        </div>
+                      </div>
+                    </div>
+
+        </div>
+        <div class="ms_our-team">
+          <h2 class="text-align-left">{{ about.team_title }}</h2>
+          <div class="row">
+            <div class="grid-sizer col-sm-6 col-md-3 colg-4"></div>
+              {% if team.count %}
+              {% for i in team %}
+            <!-- Team Item-->
+                        <div class="grid-item col-xs-6 col-sm-6 col-md-3 co-lg-4 pb-lg-5 pb-4"><img src="{{ i.image.url }}" alt="{{ i.name }}">
+                          <h4>{{ i.name}}</h4>
+                          <p>{{ i.icon }}</p>
+                        </div>
+              {% endfor %}
+                {% endif %}
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    {% include 'includes/footer.html' %}
+
+{% endblock %}

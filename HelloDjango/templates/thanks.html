@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %} Спасибо! | {{ block.super }} {% endblock %}
+
+{% block content %}
+    <section class="fof-wrapper container" style="opacity: 1;margin-top: 30vh;">
+      <div class="fof pb-5">
+        <h1 class="fof-bg mt-5 pt-5"><i class="far fa-handshake"></i></h1>
+        <div class="container ms-content" style="opacity: 1;">
+          <div class="text-center margin-bottom-lg">
+            <h1 class="fof-title pt-4">Спасибо!</h1>
+            <p class="pt-3 pb-5">Мы свяжемся с Вами в ближайшее время. <br><a href="/">Вернуться на главную</a><span></br> или </span><a href="{% url 'catalog' %}">перейти в каталог.</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% endblock  %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{%  block title %} Контакты | {{ block.super }} {% endblock %}
+
+{% block content %}
+
+    <section class="hero hero--overlay-layer hero-default">
+      <div class="container" style="opacity: 1;">
+        <div class="hero__content text-left"><span>Контакты</span>
+          <h1>{{ contacts.title }}</h1>
+          <p>{{ contacts.sub_title}}</p>
+        </div>
+      </div>
+    </section>
+    <div class="container ms-content" style="opacity: 1;">
+      <div class="ms-contact-page row">
+        <div class="grid-sizer col-sm-12 col-md-6 col-lg-4"></div>
+        <!--Contact Info-->
+        <div class="col-12 col-md-6 col-lg-6 contact__list pr-lg-5 pr-md-3">
+          <div class="contact__item">
+            <h4>Адрес</h4>
+            <p class="text-sm">{{ contacts.address }}</p>
+          </div>
+          <div class="contact__item">
+            <h4>Email</h4>
+            <p class="text-sm"><a href="mailto:{{ contacts.email }}">{{ contacts.email }}</a></p>
+          </div>
+          <div class="contact__item">
+            <h4>Телефон</h4>
+            <p class="text-sm"><a href="tel:{{ contacts.phone }}">{{ contacts.phone }}</a></p>
+          </div>
+          <div class="contact__item">
+            <h4>Мы в сети</h4>
+              {%  for i in socials %}
+                <ul class="socials">
+                  <li class="ms-btn"><a href="{{ i.url }}" target="_blank">{% autoescape off %}{{ i.icon }}{% endautoescape %}</a></li>
+                </ul>
+              {% endfor %}
+          </div>
+        </div>
+        <!--Contact Form-->
+        <div class="col-md-6 col-lg-6 pb-lg-5 contact__form pb-lg-5">
+          {% autoescape off %}{{ contacts.map_iframe }}{% endautoescape %}
+        </div>
+      </div>
+    </div>
+
+    {% include 'includes/footer.html' %}
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load thumbnail %}
+
+{% block content %}
+    <div class="swiper-container swiper-full-page">
+      <div class="swiper-wrapper">
+
+        <!-- Slide-->
+            {% for slide in slides %}
+                <div class="swiper-slide">
+                  <div class="swiper-slide__inner">
+                    <div class="slide-image">
+                        {% thumbnail slide.image "1920x969" crop="center" as im %}
+                            <img src="{{ im.url }}" alt="Slide" class="">
+                        {% endthumbnail %}
+                    </div>
+                    <div class="slide-title-container row">
+                      <div class="slide-title--inner">
+                        <div class="slide-info__left">
+                          <div class="ms-slide-count"><span>0{{ slide.order }}</span>
+                            <span class="total-count">/ 0{{ slides.count }}</span>
+                          </div>
+                          <div class="slide-title">
+                            <div class="slide-cat">{{ slide.sub_title }}</div>
+                            <h3>{{ slide.title }}</h3>
+                            <a class="slide-link" rel="noreferrer" href="{% url 'catalog' %}">{{ slide.btn_text }}<span></span></a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="slider-nav">
+                        <div class="swiper-button-prev">
+                          <svg version="1.1" viewBox="0 0 36 36" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <polyline class="st0" points="11,18 16,13 21,18 "></polyline>
+                            <path class="st0" d="M21,29H11c-4.4,0-8-3.6-8-8V11c0-4.4,3.6-8,8-8h10c4.4,0,8,3.6,8,8v10C29,25.4,25.4,29,21,29z"></path>
+                          </svg>
+                        </div>
+                        <div class="swiper-button-next">
+                          <svg version="1.1" viewBox="0 0 36 36" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <polyline class="st0" points="21,14 16,19 11,14 "></polyline>
+                            <path class="st0" d="M21,29H11c-4.4,0-8-3.6-8-8V11c0-4.4,3.6-8,8-8h10c4.4,0,8,3.6,8,8v10C29,25.4,25.4,29,21,29z"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            {% endfor %}
+      </div>
+      <ul class="socials">
+          {% for i in socials %}
+              <a href="{{ i.url }}" target="_blank">{% autoescape off %}{{ i.icon }}{% endautoescape %}</a>
+          {% endfor %}
+      </ul>
+      <div class="slider footer-copyright">
+        <p>Мир Диванов © 2020. Разработано <a href="https://dev-space.ru" target="_blank" style="color: orange;">Space Developers</a></p>
+      </div>
+    </div>
+{% endblock %}
