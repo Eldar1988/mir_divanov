@@ -1,6 +1,9 @@
 *{
     box-sizing: border-box;
 }
+.main-header__logo a, .main-header__logo svg, .main-header__logo img {
+    height:35px;
+}
 .main-header.transparent-bg .main-header__nav-trigger, .main-header.full-slider .main-header__nav-trigger {
     color: #fff;
     background: inherit;

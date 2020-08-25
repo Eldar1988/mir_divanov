@@ -63,7 +63,7 @@ class Team(models.Model):
 
 class Logo(models.Model):
     """Логотип"""
-    logo = models.ImageField('Логотип', upload_to='logo/')
+    logo = models.ImageField('Логотип', upload_to=path_and_rename("logo/", 'logo'))
 
     class Meta:
         verbose_name = 'Логотип'
